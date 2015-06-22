@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 
 public class EditFriendsActivity extends ActionBarActivity {
 
@@ -19,6 +22,14 @@ public class EditFriendsActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edit_friends, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.orderByAscending(ParseConstants.KEY_USERNAME);
+        query.setLimit(1000);
     }
 
     @Override
