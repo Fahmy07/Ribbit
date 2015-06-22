@@ -37,6 +37,7 @@
             android:name=".EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
