@@ -1,13 +1,15 @@
 package com.example.fahmy.ribbit;
 
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
@@ -18,29 +20,30 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-/**
- * Created by hp on 6/21/2015.
- */
-public class FriendsFragment extends ListFragment {
-    public static final String TAG = FriendsFragment.class.getSimpleName();
+
+public class RecipientsActivity extends ListActivity {
+    public static final String TAG = RecipientsActivity.class.getSimpleName();
 
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
     protected List<ParseUser> mFriends;
     protected ProgressBar mProgressBar;
 
+    protected MenuItem mSendMenuItem;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
-        return rootView;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipients);
+
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        mProgressBar = (ProgressBar) getActivity().findViewById(R.id.friendsFragmentProgressBar);
+        mProgressBar = (ProgressBar) findViewById(R.id.recipientsProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
 
         mCurrentUser = ParseUser.getCurrentUser();
@@ -52,6 +55,7 @@ public class FriendsFragment extends ListFragment {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
                 mProgressBar.setVisibility(View.INVISIBLE);
+
                 if (e == null) {
                     mFriends = friends;
                     String[] usernames = new String[mFriends.size()];
@@ -62,12 +66,12 @@ public class FriendsFragment extends ListFragment {
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             getListView().getContext(),
-                            android.R.layout.simple_list_item_1,
+                            android.R.layout.simple_list_item_checked,
                             usernames);
                     setListAdapter(adapter);
                 } else {
                     Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(e.getMessage())
                             .setTitle(getString(R.string.error_title))
                             .setPositiveButton(android.R.string.ok, null);
@@ -76,5 +80,41 @@ public class FriendsFragment extends ListFragment {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_recipients, menu);
+        mSendMenuItem = menu.getItem(0);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.action_send:
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        if (l.getCheckedItemCount() > 0) {
+            mSendMenuItem.setVisible(true);
+        }
+        else {
+            mSendMenuItem.setVisible(false);
+        }
     }
 }

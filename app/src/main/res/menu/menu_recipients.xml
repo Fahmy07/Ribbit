@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.fahmy.ribbit.RecipientsActivity">
+    <item
+        android:id="@+id/action_send"
+        android:orderInCategory="100"
+        android:title="@string/menu_send_label"
+        app:showAsAction="always"
+        android:visible="false"
+        android:icon="@mipmap/ic_send_white"/>
+</menu>

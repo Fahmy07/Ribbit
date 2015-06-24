@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity$PlaceholderFragment">
+    tools:context="com.example.fahmy.ribbit.RecipientsActivity">
 
     <ListView
         android:layout_width="match_parent"
@@ -11,17 +11,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
     <TextView
-        android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/empty_friends_label"/>
-
+        android:id="@android:id/empty"
+        android:text="@string/empty_recipients_list_message"/>
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/friendsFragmentProgressBar"
+        android:id="@+id/recipientsProgressBar"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
