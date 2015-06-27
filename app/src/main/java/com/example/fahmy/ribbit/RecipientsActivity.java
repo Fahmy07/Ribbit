@@ -110,7 +110,7 @@ public class RecipientsActivity extends ListActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_send:
-                ParseObject message = creatMessage();
+                ParseObject message = createMessage();
 
                 if (message == null) {
                     // error
@@ -142,7 +142,7 @@ public class RecipientsActivity extends ListActivity {
         }
     }
 
-    protected ParseObject creatMessage() {
+    protected ParseObject createMessage() {
         ParseObject message = new ParseObject(ParseConstants.CLASS_MESSAGES);
         message.put(ParseConstants.KEY_SENDER_ID, ParseUser.getCurrentUser().getObjectId());
         message.put(ParseConstants.KEY_SENDER_NAME, ParseUser.getCurrentUser().getUsername());
