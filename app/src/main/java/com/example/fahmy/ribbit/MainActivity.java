@@ -16,19 +16,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.ParseUser;
@@ -46,7 +40,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected static final int MEDIA_TYPE_IMAGE = 4;
     protected static final int MEDIA_TYPE_VIDEO = 5;
 
-    public static final int FILE_SIZELIMIT = 1024*1024*10; // 10 MB
+    public static final int FILE_SIZE_LIMIT = 1024*1024*10; // 10 MB
 
     protected Uri mMediaUri;
 
@@ -221,7 +215,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (resultCode == PICK_PHOTO_REQUEST || resultCode == PICK_VIDEO_REQUEST) {
+            if (requestCode == PICK_PHOTO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
                 if (data == null) {
                     Toast.makeText(this, getString(R.string.general_error), Toast.LENGTH_LONG).show();
                 }
@@ -236,7 +230,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     try {
                         inputStream = getContentResolver().openInputStream(mMediaUri);
                         fileSize = inputStream.available();
-                    } catch (FileNotFoundException e) {
+                    }
+                    catch (FileNotFoundException e) {
                         Toast.makeText(this,
                                 getString(R.string.error_opening_file), Toast.LENGTH_LONG).show();
                         return;
@@ -251,7 +246,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                                 inputStream.close();
                             } catch (IOException e) { /* Intentionally blank */ }
                     }
-                    if (fileSize >= FILE_SIZELIMIT) {
+                    if (fileSize >= FILE_SIZE_LIMIT) {
                         Toast.makeText(this,
                                 getString(R.string.error_file_size_too_large), Toast.LENGTH_LONG).show();
                         return;
@@ -268,7 +263,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             recipientsIntent.setData(mMediaUri);
 
             String fileType;
-            if (requestCode == TAKE_PHOTO_REQUEST || requestCode == PICK_PHOTO_REQUEST) {
+            if (requestCode == PICK_PHOTO_REQUEST || requestCode == TAKE_PHOTO_REQUEST) {
                 fileType = ParseConstants.TYPE_IMAGE;
             }
             else {
