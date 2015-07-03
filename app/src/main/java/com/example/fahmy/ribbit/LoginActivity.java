@@ -1,15 +1,14 @@
 package com.example.fahmy.ribbit;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
@@ -23,6 +22,7 @@ public class LoginActivity extends Activity {
     protected TextView mPassword;
     protected Button mLoginButton;
     protected TextView mSignUpTextView;
+    protected ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,10 @@ public class LoginActivity extends Activity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+
+        mProgressBar = (ProgressBar)findViewById(R.id.loginProgressBar);
         mSignUpTextView = (TextView)findViewById(R.id.signUpText);
         mSignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +66,12 @@ public class LoginActivity extends Activity {
                 }
                 else {
                     // login
-                    setProgressBarIndeterminateVisibility(true);
+                    mProgressBar.setVisibility(View.VISIBLE);
 
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
-                            setProgressBarIndeterminateVisibility(false);
+                            mProgressBar.setVisibility(View.INVISIBLE);
 
                             if (e == null) {
                                 // Success
