@@ -22,6 +22,7 @@ public class SignUpActivity extends ActionBarActivity {
     protected TextView mEmail;
     protected Button mSignUpButton;
     protected ProgressBar mProgressBar;
+    protected Button mCancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,16 @@ public class SignUpActivity extends ActionBarActivity {
         mUserName = (TextView)findViewById(R.id.usernameField);
         mPassword = (TextView)findViewById(R.id.passwordField);
         mEmail = (TextView)findViewById(R.id.emailField);
-        mSignUpButton = (Button)findViewById(R.id.signupButton);
 
+        mCancelButton = (Button)findViewById(R.id.cancelButton);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mSignUpButton = (Button)findViewById(R.id.signupButton);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
