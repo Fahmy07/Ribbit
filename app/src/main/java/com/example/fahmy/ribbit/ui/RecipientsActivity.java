@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -14,6 +14,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.fahmy.ribbit.utils.FileHelper;
+import com.example.fahmy.ribbit.utils.ParseConstants;
+import com.example.fahmy.ribbit.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;

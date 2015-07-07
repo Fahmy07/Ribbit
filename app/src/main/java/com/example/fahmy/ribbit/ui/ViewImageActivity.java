@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.ui;
 
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.example.fahmy.ribbit.R;
 import com.squareup.picasso.Picasso;
 
 

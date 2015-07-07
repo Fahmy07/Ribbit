@@ -18,6 +18,6 @@
         android:id="@+id/action_camera"
         android:orderInCategory="102"
         android:title="@string/menu_camera_label"
-        android:icon="@mipmap/ic_camera_alt_white_48dp"
+        android:icon="@drawable/ic_menu_camera"
         app:showAsAction="always"/>
 </menu>

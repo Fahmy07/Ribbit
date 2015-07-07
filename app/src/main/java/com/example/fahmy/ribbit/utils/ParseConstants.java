@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.utils;
 
 /**
  * Created by hp on 6/22/2015.

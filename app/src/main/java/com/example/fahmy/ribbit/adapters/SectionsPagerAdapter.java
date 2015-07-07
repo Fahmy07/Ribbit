@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.adapters;
 
 /**
  * Created by hp on 6/21/2015.
@@ -8,6 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.content.Context;
+
+import com.example.fahmy.ribbit.R;
+import com.example.fahmy.ribbit.ui.FriendsFragment;
+import com.example.fahmy.ribbit.ui.InboxFragment;
+
 import java.util.Locale;
 
 /**
@@ -52,5 +57,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return mContext.getString(R.string.title_section2).toUpperCase(l);
         }
         return null;
+    }
+
+    public int getIcon(int position) {
+        switch(position) {
+            case 0:
+                return R.drawable.ic_tab_inbox;
+            case 1:
+                return R.drawable.ic_tab_friends;
+        }
+        return R.drawable.ic_tab_inbox;
     }
 }

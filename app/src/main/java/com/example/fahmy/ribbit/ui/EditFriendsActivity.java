@@ -1,17 +1,17 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.fahmy.ribbit.utils.ParseConstants;
+import com.example.fahmy.ribbit.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

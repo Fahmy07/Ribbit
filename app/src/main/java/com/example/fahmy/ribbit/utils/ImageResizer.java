@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.utils;
 
 import java.io.ByteArrayOutputStream;
 

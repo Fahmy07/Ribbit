@@ -1,4 +1,4 @@
-package com.example.fahmy.ribbit;
+package com.example.fahmy.ribbit.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.fahmy.ribbit.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -31,7 +32,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         ActionBar actionBar = getActionBar();
-        actionBar.hide();
+        try {
+            actionBar.hide();
+        }
+        catch (NullPointerException e) {
+            e.getMessage();
+        }
 
         mProgressBar = (ProgressBar)findViewById(R.id.loginProgressBar);
         mSignUpTextView = (TextView)findViewById(R.id.signUpText);

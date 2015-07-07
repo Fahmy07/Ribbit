@@ -3,7 +3,7 @@
     style="@style/AuthBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fahmy.ribbit.SignUpActivity">
+    tools:context="com.example.fahmy.ribbit.ui.SignUpActivity">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -43,7 +43,7 @@
         android:layout_below="@+id/editTextLayout"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/content_desc_button_divider"
-        android:src="@mipmap/button_divider" />
+        android:src="@drawable/button_divider" />
 
     <Button
         android:id="@+id/signupButton"
