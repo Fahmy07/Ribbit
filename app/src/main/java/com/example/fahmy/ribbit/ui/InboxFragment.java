@@ -1,5 +1,7 @@
 package com.example.fahmy.ribbit.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,7 +54,39 @@ public class InboxFragment extends ListFragment {
     }
 
     @Override
-    public void onResume() {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> arg0, View v, final int position, long id) {
+
+                QustomDialogBuilder qustomDialogBuilder = (QustomDialogBuilder) new QustomDialogBuilder(getActivity()).
+                        setTitle(getString(R.string.delete_message_title)).
+                        setTitleColor("#1e0142").
+                        setDividerColor("#1e0142").
+                        setMessage(getString(R.string.delete_message_msg)).
+                        setIcon(R.drawable.ic_menu_delete).
+                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ParseObject message = mMessages.get(position);
+                                message.deleteInBackground();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+
+                qustomDialogBuilder.show();
+                return true;
+            }
+        });
+    }
+
+        @Override
+        public void onResume() {
         super.onResume();
 
         mProgressBar = (ProgressBar) getActivity().findViewById(R.id.inboxFragmentProgressBar);
@@ -118,6 +154,8 @@ public class InboxFragment extends ListFragment {
             startActivity(intent);
         }
     }
+
+
 
     protected SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override

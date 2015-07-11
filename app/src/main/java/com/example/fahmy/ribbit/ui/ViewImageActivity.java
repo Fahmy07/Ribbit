@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.example.fahmy.ribbit.R;
+import com.parse.ParseObject;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 
 public class ViewImageActivity extends ActionBarActivity {
@@ -24,19 +27,4 @@ public class ViewImageActivity extends ActionBarActivity {
 
         Picasso.with(this).load(imageUri.toString()).into(imageView);
     }
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

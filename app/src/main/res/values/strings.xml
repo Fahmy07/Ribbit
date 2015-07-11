@@ -52,4 +52,7 @@
     <string name="content_desc_user_avatar">User avatar</string>
     <string name="content_desc_user_checkmark">User checkmark</string>
     <string name="push_message">You have a new Ribbit message from %s!</string>
+    <string name="menu_delete_image">Delete</string>
+    <string name="delete_message_title">DELETE MESSAGE</string>
+    <string name="delete_message_msg">Are you sure?</string>
 </resources>
