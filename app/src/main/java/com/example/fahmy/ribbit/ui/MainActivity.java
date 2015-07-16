@@ -23,6 +23,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.example.fahmy.ribbit.utils.ParseConstants;
@@ -167,6 +168,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -180,8 +182,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+        try {
+            assert actionBar != null;
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        }
+        catch (NullPointerException e) {
+            e.getMessage();
+        }
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.mipmap.ic_launcher);
 

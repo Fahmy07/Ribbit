@@ -60,13 +60,10 @@ public class InboxFragment extends ListFragment {
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> arg0, View v, final int position, long id) {
 
-                QustomDialogBuilder qustomDialogBuilder = (QustomDialogBuilder) new QustomDialogBuilder(getActivity()).
-                        setTitle(getString(R.string.delete_message_title)).
-                        setTitleColor("#1e0142").
-                        setDividerColor("#1e0142").
-                        setMessage(getString(R.string.delete_message_msg)).
-                        setIcon(R.drawable.ic_menu_delete).
-                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.delete_message_title))
+                        .setMessage(getString(R.string.delete_message_msg))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 ParseObject message = mMessages.get(position);
@@ -76,10 +73,32 @@ public class InboxFragment extends ListFragment {
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
-                        });
+                        })
+                        .setIcon(R.drawable.ic_menu_delete)
+                .show();
 
-                qustomDialogBuilder.show();
+//                QustomDialogBuilder qustomDialogBuilder = (QustomDialogBuilder) new QustomDialogBuilder(getActivity()).
+//                        setTitle(getString(R.string.delete_message_title)).
+//                        setTitleColor("#1e0142").
+//                        setDividerColor("#1e0142").
+//                        setMessage(getString(R.string.delete_message_msg)).
+//                        setIcon(R.drawable.ic_menu_delete).
+//                        setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                ParseObject message = mMessages.get(position);
+//                                message.deleteInBackground();
+//                            }
+//                        })
+//                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        });
+//
+//                qustomDialogBuilder.show();
                 return true;
             }
         });

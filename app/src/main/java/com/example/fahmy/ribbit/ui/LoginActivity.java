@@ -34,6 +34,7 @@ public class LoginActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         try {
+            assert actionBar != null;
             actionBar.hide();
         }
         catch (NullPointerException e) {
